@@ -28,7 +28,7 @@ router.route("/api/clients").post(ClientController.get);
  * @openapi
  * /api/clients/:id:
  *   get:
- *     description: login method
+ *     description: get client by id
  *     parameters:
  *      - name: id
  *        type: string

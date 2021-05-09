@@ -8,6 +8,8 @@ const AuthController = require("../controllers/auth.controller");
  * /api/login:
  *   post:
  *     description: login method
+ *     tags:
+ *      - Auth
  *     parameters:
  *      - name: body
  *        example: {client_id: string, client_secret: string}
