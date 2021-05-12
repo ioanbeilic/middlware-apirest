@@ -1,41 +1,50 @@
-/*
-GET
-​/clients
-​/clients​/:id
-​/clients​/:id​/policies
-*/
+import { clients as clientsService } from "../services/clients.service";
+import { policies as policiesService } from "../services/policies.service";
 
-module.exports = {
-  get: async (req, res, next) => {
-    try {
-      // TODO get from service
-      const clients = {};
-      res.send(clients);
-    } catch (err) {
-      res.status(500).send(err);
-    }
-  },
-  getById: async (req, res, next) => {
-    const { id } = req.params;
+export async function get(req, res) {
+  const { limit, name } = req.query;
+  let { ok, data } = await clientsService();
 
-    try {
-      const clients = this.get();
-      const client = clients.filter((x) => x.id === id);
-      res.send(client);
-    } catch (error) {
-      res.status(500).send(err);
-    }
-  },
-  getPoliciesByClientId: async (req, res, next) => {
-    const { id } = req.params;
+  if (name) {
+    data = data.filter((x) => x.name === name);
+  }
+  if (limit) {
+    data = data.slice(0, limit);
+  }
 
-    try {
-      // TODO - call policies service  filter with client id
-      const client = this.getById();
-      const policies = [];
-      res.send(policies);
-    } catch (error) {
-      res.status(500).send(err);
-    }
-  },
-};
+  if (ok) {
+    console.log("all clients ok return data");
+    return res.status(200).send(data);
+  }
+
+  return res.status(500).send("Failed to get data");
+}
+export async function getById(req, res) {
+  const id = req.params.id;
+
+  let { ok, data } = await clientsService();
+  const policies = await policiesService();
+  let { ok: policiesOk, data: policiesData } = policies;
+  console.log(policiesData);
+
+  let client = data.filter((x) => x.id === id);
+  client.policies = policiesData.filter((x) => x.clientId === id);
+
+  if (ok && policiesOk) {
+    return res.status(200).send(client);
+  }
+  return res.status(500).send(err);
+}
+export async function getPoliciesByClientId(req, res) {
+  //clientId
+  const id = req.params.id;
+
+  let { ok, data } = await policiesService();
+
+  const policies = data.filter((x) => x.clientId === id);
+
+  if (ok) {
+    return res.status(200).send(policies);
+  }
+  return res.status(500).send(err);
+}
