@@ -1,7 +1,7 @@
 import { Router } from "express";
 const router = Router();
 
-import { get, getById } from "../controllers/policy.controller";
+import { get, getById } from "../controllers/policy.controller.js";
 
 /**
  * @openapi

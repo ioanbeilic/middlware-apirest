@@ -5,7 +5,7 @@ import {
   get,
   getById,
   getPoliciesByClientId,
-} from "../controllers/client.controller";
+} from "../controllers/client.controller.js";
 
 /**
  * @openapi

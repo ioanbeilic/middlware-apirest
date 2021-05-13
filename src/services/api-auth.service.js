@@ -1,5 +1,7 @@
-import { post } from "axios";
-import app from "../app";
+import axios from "axios";
+import app from "../app.js";
+
+const { post } = axios;
 
 export async function login() {
   try {

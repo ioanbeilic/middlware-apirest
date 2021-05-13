@@ -1,6 +1,7 @@
-import { login as _login } from "../services/auth.service";
 import { hashSync, compareSync } from "bcrypt";
-import { sign } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+
+const { sign } = jwt;
 
 export const login = async (req, res) => {
   const { username, password } = req.body;

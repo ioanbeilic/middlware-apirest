@@ -1,5 +1,5 @@
-import { clients as clientsService } from "../services/clients.service";
-import { policies as policiesService } from "../services/policies.service";
+import { clients as clientsService } from "../services/clients.service.js";
+import { policies as policiesService } from "../services/policies.service.js";
 
 export async function get(req, res) {
   const { limit, name } = req.query;

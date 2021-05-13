@@ -1,14 +1,15 @@
 // https://github.com/visionmedia/supertest
-const request = require("supertest");
-const expect = require("chai").expect;
-const should = require("chai").should();
+import request from "supertest";
+import app from "../src/app";
 
-const app = require("../src/app");
-app.listen(3001, () => console.log(`Test server on port 3001`));
+jest.useFakeTimers();
+
+app.listen(3001);
+console.log(`Test server on port 3001`);
 
 describe("POST /login", () => {
-  it("should return a 200 and a json content type", (done) => {
-    request(app)
+  it("should return a 200 and a json content type", async (done) => {
+    await request(app)
       .post("/api/login")
       .send({
         username: "test",

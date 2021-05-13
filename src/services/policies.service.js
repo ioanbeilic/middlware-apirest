@@ -1,6 +1,8 @@
-import { get } from "axios";
-import app from "../app";
-import { login as apiLogin } from "./api-auth.service";
+import axios from "axios";
+import app from "../app.js";
+import { login as apiLogin } from "./api-auth.service.js";
+
+const { get } = axios;
 
 export async function policies() {
   try {

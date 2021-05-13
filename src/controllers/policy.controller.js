@@ -1,4 +1,4 @@
-import { policies as policiesService } from "../services/policies.service";
+import { policies as policiesService } from "../services/policies.service.js";
 
 export async function get(req, res) {
   const { limit } = req.query;

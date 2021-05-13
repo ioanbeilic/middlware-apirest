@@ -2,9 +2,9 @@ import express, { json } from "express";
 import cors from "cors";
 
 // routes
-import AuthRoutes from "./routes/auth.routes";
-import ClientRoutes from "./routes/client.routes";
-import PolicyRoutes from "./routes/policy.routes";
+import AuthRoutes from "./routes/auth.routes.js";
+import ClientRoutes from "./routes/client.routes.js";
+import PolicyRoutes from "./routes/policy.routes.js";
 
 const app = express();
 app.use(cors());
